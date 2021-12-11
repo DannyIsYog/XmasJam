@@ -12,6 +12,8 @@ public class Eowyn : MonoBehaviour
     private float _offset = 2f;
     [SerializeField]
     private float _attackRange = 0.5f;
+    [SerializeField]
+    private LayerMask _layerMask;
 
     private float _movement = 0f;
     private bool _facingRight = true;
@@ -46,7 +48,8 @@ public class Eowyn : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.MovePosition(transform.position + _movement * _speed * transform.right * Time.fixedDeltaTime);
+        if (_movement != 0)
+            _rb.MovePosition(transform.position + _movement * _speed * transform.right * Time.fixedDeltaTime);
     }
 
     void Attack()
@@ -54,6 +57,11 @@ public class Eowyn : MonoBehaviour
         _defending = false;
         _animator.SetBool("Shield", _defending);
         _animator.SetTrigger("Attack");
+
+        Vector2 attackPoint = transform.position + transform.localScale.x * transform.right * _offset;
+        Collider2D enemy = Physics2D.OverlapCircle(attackPoint, _attackRange, _layerMask);
+        if (enemy)
+            Debug.Log("HIT");
     }
 
     void Shield()

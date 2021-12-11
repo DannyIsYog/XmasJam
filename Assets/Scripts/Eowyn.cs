@@ -4,27 +4,15 @@ using UnityEngine;
 
 public class Eowyn : MonoBehaviour
 {
-    private Rigidbody2D _rb;
     private Animator _animator;
     private bool _defending = false;
 
-    [SerializeField]
-    private float _offset = 2f;
-    [SerializeField]
-    private float _attackRange = 0.5f;
-    [SerializeField]
-    private LayerMask _layerMask;
-
-    private float _movement = 0f;
-    private bool _facingRight = true;
-
-    [SerializeField]
-    private float _speed = 2f;
+    private Entity _entity;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _entity = GetComponent<Entity>();
     }
 
     void Update()
@@ -36,20 +24,7 @@ public class Eowyn : MonoBehaviour
         else if (!_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
             Shield();
 
-        _movement = Input.GetAxisRaw("Horizontal") * _speed;
-        if ((_movement < 0 && _facingRight) || (_movement > 0 && !_facingRight))
-        {
-            _facingRight = !_facingRight;
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (_movement != 0)
-            _rb.MovePosition(transform.position + _movement * _speed * transform.right * Time.fixedDeltaTime);
+        _entity.SetMovement(Input.GetAxisRaw("Horizontal"));
     }
 
     void Attack()
@@ -57,21 +32,12 @@ public class Eowyn : MonoBehaviour
         _defending = false;
         _animator.SetBool("Shield", _defending);
         _animator.SetTrigger("Attack");
-
-        Vector2 attackPoint = transform.position + transform.localScale.x * transform.right * _offset;
-        Collider2D enemy = Physics2D.OverlapCircle(attackPoint, _attackRange, _layerMask);
-        if (enemy)
-            Debug.Log("HIT");
+        _entity.Attack();
     }
 
     void Shield()
     {
         _defending = !_defending;
         _animator.SetBool("Shield", _defending);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position + transform.localScale.x * transform.right * _offset, _attackRange);
-    }
+    }    
 }

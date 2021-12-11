@@ -19,6 +19,9 @@ public class WitchKing : MonoBehaviour
 
     void OnPlayerAttack(float strength)
     {
-        Destroy(gameObject);
+        if (_entity.TakeDamage(strength))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -28,8 +28,9 @@ public class Eowyn : MonoBehaviour
         else if (!_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
             Shield();
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            _rb.AddForce(Vector2.up * 500f);
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+            if (_rb.velocity.y == 0)
+                _rb.AddForce(Vector2.up * 1000f);
 
         _entity.SetMovement(Input.GetAxisRaw("Horizontal"));
     }
@@ -50,9 +51,15 @@ public class Eowyn : MonoBehaviour
 
     void OnEnemyAttack(float strength)
     {
+        bool dies = false;
         if (!_defending || !_hasShield)
-            _entity.TakeDamage(strength);
+            dies = _entity.TakeDamage(strength);
         else
-            _entity.TakeDamage(Random.Range(0, strength / 3));
+            dies = _entity.TakeDamage(Random.Range(0, strength / 3));
+
+        if (dies)
+        {
+            Destroy(gameObject);
+        }
     }
 }

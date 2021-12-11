@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour
         public float range;
     }
 
-    [SerializeField] 
+    [SerializeField]
     private AttackHitbox _attackHitbox;
 
     [SerializeField]
@@ -28,7 +28,7 @@ public class Entity : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() 
+    void Update()
     {
         if ((_movement < 0 && _facingRight) || (_movement > 0 && !_facingRight))
         {
@@ -59,6 +59,7 @@ public class Entity : MonoBehaviour
 
     public void SetMovement(float value)
     {
+        Debug.Log(value);
         _movement = value * _speed;
     }
 

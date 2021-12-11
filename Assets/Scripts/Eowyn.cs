@@ -6,14 +6,17 @@ public class Eowyn : MonoBehaviour
 {
     private Animator _animator;
     private bool _defending = false;
+    private bool _hasShield = true;
 
     private Entity _entity;
+    private Rigidbody2D _rb;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
         _entity = GetComponent<Entity>();
         _entity.onEnemyAttack += OnEnemyAttack;
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -24,6 +27,9 @@ public class Eowyn : MonoBehaviour
             Attack();
         else if (!_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
             Shield();
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            _rb.AddForce(Vector2.up * 500f);
 
         _entity.SetMovement(Input.GetAxisRaw("Horizontal"));
     }
@@ -42,9 +48,11 @@ public class Eowyn : MonoBehaviour
         _animator.SetBool("Shield", _defending);
     }
 
-    void OnEnemyAttack(float strenght)
+    void OnEnemyAttack(float strength)
     {
-        if (!_defending)
-            _entity.TakeDamage(strenght);
+        if (!_defending || !_hasShield)
+            _entity.TakeDamage(strength);
+        else
+            _entity.TakeDamage(Random.Range(0, strength / 3));
     }
 }

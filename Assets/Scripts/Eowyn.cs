@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class Eowyn : MonoBehaviour
 {
+    private Rigidbody2D _rb;
     private Animator _animator;
     private bool _defending = false;
 
+    [SerializeField]
+    private float _offset = 2f;
+    [SerializeField]
+    private float _attackRange = 0.5f;
+
+    private float _movement = 0f;
+    private bool _facingRight = true;
+
+    [SerializeField]
+    private float _speed = 2f;
+
     void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -20,6 +33,20 @@ public class Eowyn : MonoBehaviour
             Attack();
         else if (!_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
             Shield();
+
+        _movement = Input.GetAxisRaw("Horizontal") * _speed;
+        if ((_movement < 0 && _facingRight) || (_movement > 0 && !_facingRight))
+        {
+            _facingRight = !_facingRight;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        _rb.MovePosition(transform.position + _movement * _speed * transform.right * Time.fixedDeltaTime);
     }
 
     void Attack()
@@ -33,5 +60,10 @@ public class Eowyn : MonoBehaviour
     {
         _defending = !_defending;
         _animator.SetBool("Shield", _defending);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position + transform.localScale.x * transform.right * _offset, _attackRange);
     }
 }

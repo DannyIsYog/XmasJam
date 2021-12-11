@@ -19,10 +19,7 @@ public class WitchKingRun : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         float offset = _player.position.x - animator.transform.position.x;
-        Debug.Log("Offset:" + offset.ToString());
         float side = (offset) / Mathf.Abs(offset);
-        Debug.Log("Side:" + side.ToString());
-
         entity.SetMovement(side);
     }
 

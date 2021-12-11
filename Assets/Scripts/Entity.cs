@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -22,6 +23,11 @@ public class Entity : MonoBehaviour
     private float _speed = 2f;
 
     private Rigidbody2D _rb;
+
+    [SerializeField]
+    private float _strength = 2f;
+    private float _health = 100f;
+    public Action<float> onEnemyAttack;
 
     void Start()
     {
@@ -48,8 +54,18 @@ public class Entity : MonoBehaviour
     public void Attack()
     {
         Collider2D enemy = Physics2D.OverlapCircle(GetHitboxPos(), _attackHitbox.range, _enemyMask);
-        if (enemy)
-            Debug.Log("HIT");
+        if (enemy != null)
+        {
+            Entity entity = enemy.GetComponent<Entity>();
+            if (entity.onEnemyAttack != null)
+                entity.onEnemyAttack(_strength);
+        }
+    }
+
+    public bool TakeDamage(float damage)
+    {
+        _health -= damage;
+        return _health <= 0;
     }
 
     public Vector2 GetHitboxPos()
@@ -59,7 +75,6 @@ public class Entity : MonoBehaviour
 
     public void SetMovement(float value)
     {
-        Debug.Log(value);
         _movement = value * _speed;
     }
 

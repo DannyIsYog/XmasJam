@@ -13,6 +13,7 @@ public class Eowyn : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _entity = GetComponent<Entity>();
+        _entity.onEnemyAttack += OnEnemyAttack;
     }
 
     void Update()
@@ -39,5 +40,11 @@ public class Eowyn : MonoBehaviour
     {
         _defending = !_defending;
         _animator.SetBool("Shield", _defending);
-    }    
+    }
+
+    void OnEnemyAttack(float strenght)
+    {
+        if (!_defending)
+            _entity.TakeDamage(strenght);
+    }
 }

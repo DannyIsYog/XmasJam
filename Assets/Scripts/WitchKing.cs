@@ -14,10 +14,11 @@ public class WitchKing : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _entity = GetComponent<Entity>();
+        _entity.onEnemyAttack += OnPlayerAttack;
     }
 
-    void Update()
+    void OnPlayerAttack(float strength)
     {
-
+        Destroy(gameObject);
     }
 }

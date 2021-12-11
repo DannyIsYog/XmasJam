@@ -48,7 +48,7 @@ public class Entity : MonoBehaviour
     void FixedUpdate()
     {
         if (_movement != 0)
-            _rb.MovePosition(transform.position + _movement * _speed * transform.right * Time.fixedDeltaTime);
+            _rb.velocity = new Vector2(_speed * _movement, _rb.velocity.y);
     }
 
     public void Attack()

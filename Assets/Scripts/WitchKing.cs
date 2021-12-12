@@ -17,7 +17,7 @@ public class WitchKing : MonoBehaviour
         _entity.onEnemyAttack += OnPlayerAttack;
     }
 
-    void OnPlayerAttack(float strength)
+    void OnPlayerAttack(int strength)
     {
         if (_entity.TakeDamage(strength))
         {

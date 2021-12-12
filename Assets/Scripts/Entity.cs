@@ -25,15 +25,18 @@ public class Entity : MonoBehaviour
     private Rigidbody2D _rb;
 
     [SerializeField]
-    private float _strength = 2f;
-    private float _health = 100f;
-    public Action<float> onEnemyAttack;
+    private int _strength = 2;
+    private int _health = 100;
+    public Action<int> onEnemyAttack;
 
     public GameObject floatingPoints;
+
+    public HealthBar healthBar;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        healthBar.SetMaxHealth(_health);
     }
 
     void Update()
@@ -44,6 +47,7 @@ public class Entity : MonoBehaviour
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+            healthBar.transform.localScale = scale;
         }
     }
 
@@ -66,9 +70,10 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public bool TakeDamage(float damage)
+    public bool TakeDamage(int damage)
     {
         _health -= damage;
+        healthBar.SetHealth(_health);
         Debug.Log(_health);
         if (floatingPoints != null)
             Instantiate(floatingPoints, transform.position, Quaternion.identity);

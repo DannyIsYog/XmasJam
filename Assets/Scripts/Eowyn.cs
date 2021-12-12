@@ -49,13 +49,13 @@ public class Eowyn : MonoBehaviour
         _animator.SetBool("Shield", _defending);
     }
 
-    void OnEnemyAttack(float strength)
+    void OnEnemyAttack(int strength)
     {
         bool dies = false;
         if (!_defending || !_hasShield)
             dies = _entity.TakeDamage(strength);
         else
-            dies = _entity.TakeDamage(Random.Range(0, strength / 3));
+            dies = _entity.TakeDamage(Random.Range(0, strength));
         if (dies)
         {
             Destroy(gameObject);

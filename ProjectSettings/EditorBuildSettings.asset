@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3cfaae76df43d2b40b3af4b9da1b1db3
   - enabled: 1
+    path: Assets/Scenes/Lore.unity
+    guid: f6575c5bc53e742f4af43725a3701e41
+  - enabled: 1
     path: Assets/Scenes/Fight.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

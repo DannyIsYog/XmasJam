@@ -29,6 +29,8 @@ public class Entity : MonoBehaviour
     private float _health = 100f;
     public Action<float> onEnemyAttack;
 
+    public GameObject floatingPoints;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -68,6 +70,7 @@ public class Entity : MonoBehaviour
     {
         _health -= damage;
         Debug.Log(_health);
+        Instantiate(floatingPoints, transform.position, Quaternion.identity);
         return _health <= 0;
     }
 

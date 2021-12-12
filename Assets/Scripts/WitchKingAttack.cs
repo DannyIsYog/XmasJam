@@ -16,10 +16,14 @@ public class WitchKingAttack : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector2.Distance(_player.position, entity.GetHitboxPos()) <= entity.GetHitboxRange())
-            animator.SetBool("KeepAttacking", true);
-        else
-            animator.SetBool("KeepAttacking", false);
+        if (_player != null && entity != null)
+        {
+            if (Vector2.Distance(_player.position, entity.GetHitboxPos()) <= entity.GetHitboxRange())
+                animator.SetBool("KeepAttacking", true);
+            else
+                animator.SetBool("KeepAttacking", false);
+        }
+
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state

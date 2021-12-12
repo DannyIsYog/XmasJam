@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Eowyn : MonoBehaviour
 {
     private Animator _animator;
@@ -59,10 +59,12 @@ public class Eowyn : MonoBehaviour
         if (!_defending || !_hasShield)
             dies = _entity.TakeDamage(strength);
         else
-            dies = _entity.TakeDamage((int) Random.Range(0f, _shieldStrength * strength));
+            dies = _entity.TakeDamage((int)Random.Range(0f, _shieldStrength * strength));
         if (dies)
         {
             Destroy(gameObject);
+            EndScreen.win = false;
+            SceneManager.LoadScene("EndScreen");
         }
     }
 

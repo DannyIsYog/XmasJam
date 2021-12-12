@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WitchKing : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class WitchKing : MonoBehaviour
             if (!_part1)
             {
                 Destroy(gameObject);
+                EndScreen.win = true;
+                SceneManager.LoadScene("EndScreen");
             }
             else
             {
@@ -31,6 +34,6 @@ public class WitchKing : MonoBehaviour
                 _part1 = false;
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Eowyn>().DestroyShield();
             }
-        } 
+        }
     }
 }

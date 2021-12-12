@@ -1922,17 +1922,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Defeat the Witch King
+  m_text: 'Defeat the Tea-King of Chamomile
 
     Attack - Press "O" or "X"
 
-    Shield - Press
-    "P" or "Z"
+    Shield
+    - Press "P" or "Z"
 
     Movement - WASD or ARROWS
 
-    The boss has 2 phases, shield
-    is disabled on the 2nd phase'
+    The boss has 2 phases,
+    shield is disabled on the 2nd phase'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6698d3f821ff064aa3c74c2aa081ead, type: 2}
   m_sharedMaterial: {fileID: -9144514414512902365, guid: a6698d3f821ff064aa3c74c2aa081ead, type: 2}

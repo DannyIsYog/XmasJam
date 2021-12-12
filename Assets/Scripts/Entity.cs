@@ -70,7 +70,8 @@ public class Entity : MonoBehaviour
     {
         _health -= damage;
         Debug.Log(_health);
-        Instantiate(floatingPoints, transform.position, Quaternion.identity);
+        if (floatingPoints != null)
+            Instantiate(floatingPoints, transform.position, Quaternion.identity);
         return _health <= 0;
     }
 

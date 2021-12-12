@@ -29,7 +29,7 @@ public class Entity : MonoBehaviour
     private int _health = 100;
     public Action<int> onEnemyAttack;
 
-    public GameObject floatingPoints;
+    public DamagePopup damagePopup;
 
     public HealthBar healthBar;
 
@@ -75,8 +75,8 @@ public class Entity : MonoBehaviour
         _health -= damage;
         healthBar.SetHealth(_health);
         Debug.Log(_health);
-        if (floatingPoints != null)
-            Instantiate(floatingPoints, transform.position, Quaternion.identity);
+        if (damagePopup != null)
+            damagePopup.Create(gameObject.transform.position, damage);
         return _health <= 0;
     }
 

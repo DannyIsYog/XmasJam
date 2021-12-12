@@ -537,6 +537,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a3edba97f2f8940a6ce85a1d330f34, type: 3}
+--- !u!1 &1452012786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452012788}
+  - component: {fileID: 1452012787}
+  m_Layer: 0
+  m_Name: DamagePopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1452012787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452012786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e1931324ca2d34f80eddc6def048e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatingText: {fileID: 4276785815976202444, guid: e769b7e438176cf4391831287b3d1e62, type: 3}
+--- !u!4 &1452012788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452012786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2111402, y: -0.66310984, z: -1.1385638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1539269611
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +867,7 @@ MonoBehaviour:
     m_Bits: 64
   _speed: 3
   _strength: 2
-  floatingPoints: {fileID: 2556892619951042028, guid: 1f3055987e0919049989342946d9216c, type: 3}
+  damagePopup: {fileID: 1452012787}
   healthBar: {fileID: 398740174}
 --- !u!1 &1689402975
 GameObject:
@@ -1262,7 +1306,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2684853933834269790, guid: 2109f534f33cddc4696fa9e904164f0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1356,7 +1400,7 @@ MonoBehaviour:
     m_Bits: 8
   _speed: 2
   _strength: 2
-  floatingPoints: {fileID: 2556892619951042028, guid: 1f3055987e0919049989342946d9216c, type: 3}
+  damagePopup: {fileID: 1452012787}
   healthBar: {fileID: 526491157}
 --- !u!114 &1950903962
 MonoBehaviour:

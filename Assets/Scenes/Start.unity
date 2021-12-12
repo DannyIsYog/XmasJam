@@ -1147,5 +1147,5 @@ MonoBehaviour:
   - {fileID: 54174142}
   - {fileID: 1332277982}
   - {fileID: 241151416}
-  _delay: 3
+  _delay: 5
   _scene: MainMenu

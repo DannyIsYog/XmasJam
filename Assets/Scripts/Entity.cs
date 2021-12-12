@@ -112,7 +112,10 @@ public class Entity : MonoBehaviour
     public void RestoreHealth(bool enemy)
     {
         if (enemy)
+        {
             _health = 100;
+            _strength *= 2;
+        }
         else
             _health = Math.Min((int) (1.5f * _health), 100);
     }

@@ -56,7 +56,6 @@ public class Eowyn : MonoBehaviour
             dies = _entity.TakeDamage(strength);
         else
             dies = _entity.TakeDamage(Random.Range(0, strength / 3));
-
         if (dies)
         {
             Destroy(gameObject);

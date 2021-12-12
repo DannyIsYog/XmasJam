@@ -49,6 +49,8 @@ public class Entity : MonoBehaviour
     {
         if (_movement != 0)
             _rb.velocity = new Vector2(_speed * _movement, _rb.velocity.y);
+        else
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
     }
 
     public void Attack()
@@ -65,6 +67,7 @@ public class Entity : MonoBehaviour
     public bool TakeDamage(float damage)
     {
         _health -= damage;
+        Debug.Log(_health);
         return _health <= 0;
     }
 
@@ -81,5 +84,10 @@ public class Entity : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(GetHitboxPos(), _attackHitbox.range);
+    }
+
+    public AttackHitbox getAttackHitbox()
+    {
+        return _attackHitbox;
     }
 }

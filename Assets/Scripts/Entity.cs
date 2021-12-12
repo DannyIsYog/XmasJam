@@ -49,6 +49,15 @@ public class Entity : MonoBehaviour
             transform.localScale = scale;
             healthBar.transform.localScale = scale;
         }
+
+        if (_rb.position.x <= -8.5f) 
+        {
+            _movement = Math.Max(0f, _movement);
+        }
+        else if (_rb.position.x >= 8.5f)
+        {
+            _movement = Math.Min(0f, _movement);
+        }
     }
 
     void FixedUpdate()

@@ -7,6 +7,7 @@ public class Eowyn : MonoBehaviour
     private Animator _animator;
     private bool _defending = false;
     private bool _hasShield = true;
+    [SerializeField] private float _shieldStrength = 0.6f;
 
     private Entity _entity;
     private Rigidbody2D _rb;
@@ -21,11 +22,14 @@ public class Eowyn : MonoBehaviour
 
     void Update()
     {
-        if (_defending && (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Z)))
+        if (_defending && !_hasShield)
+            Shield();
+
+        if (_hasShield && _defending && (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Z)))
             Shield();
         else if (Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.X))
             Attack();
-        else if (!_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
+        else if (_hasShield && !_defending && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Z)))
             Shield();
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
@@ -55,10 +59,16 @@ public class Eowyn : MonoBehaviour
         if (!_defending || !_hasShield)
             dies = _entity.TakeDamage(strength);
         else
-            dies = _entity.TakeDamage(Random.Range(0, strength));
+            dies = _entity.TakeDamage((int) Random.Range(0f, _shieldStrength * strength));
         if (dies)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void DestroyShield()
+    {
+        _hasShield = false;
+        _entity.RestoreHealth(false);
     }
 }

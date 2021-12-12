@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WitchKing : MonoBehaviour
 {
-
+    private bool _part1 = true;
     private Animator _animator;
     private Entity _entity;
 
@@ -21,7 +21,16 @@ public class WitchKing : MonoBehaviour
     {
         if (_entity.TakeDamage(strength))
         {
-            Destroy(gameObject);
-        }
+            if (!_part1)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _entity.RestoreHealth(true);
+                _part1 = false;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Eowyn>().DestroyShield();
+            }
+        } 
     }
 }

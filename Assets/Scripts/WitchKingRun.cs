@@ -24,15 +24,12 @@ public class WitchKingRun : StateMachineBehaviour
             entity.SetMovement(1);
         else
             entity.SetMovement(side);
-        Vector2 hitboxPos = entity.transform.position - new Vector3(entity.getAttackHitbox().offset, 0, 0);
 
-        if (Vector2.Distance(_player.position, hitboxPos) <= entity.getAttackHitbox().range)
+        if (Vector2.Distance(_player.position, entity.GetHitboxPos()) <= entity.GetHitboxRange())
         {
             entity.SetMovement(0);
             animator.SetTrigger("Attack");
         }
-
-
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -104,8 +104,16 @@ public class Entity : MonoBehaviour
         Gizmos.DrawWireSphere(GetHitboxPos(), _attackHitbox.range);
     }
 
-    public AttackHitbox getAttackHitbox()
+    public float GetHitboxRange()
     {
-        return _attackHitbox;
+        return _attackHitbox.range;
+    }
+
+    public void RestoreHealth(bool enemy)
+    {
+        if (enemy)
+            _health = 100;
+        else
+            _health = Math.Min((int) (1.5f * _health), 100);
     }
 }
